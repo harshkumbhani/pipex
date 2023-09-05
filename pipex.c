@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:11:27 by harsh             #+#    #+#             */
-/*   Updated: 2023/09/04 07:34:50 by harsh            ###   ########.fr       */
+/*   Updated: 2023/09/05 11:51:56 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,8 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
+	(void)envp;
 
-	int		i = 0;
-	while (envp[i])
-	{
-		printf("Line %d\n", i);
-		printf("%s\n", envp[i]);
-		i++;
-	}
+	
 	return (0);
 }
