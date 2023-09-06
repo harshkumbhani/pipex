@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/03 13:11:27 by harsh             #+#    #+#             */
-/*   Updated: 2023/09/06 15:05:17 by hkumbhan         ###   ########.fr       */
+/*   Created: 2023/09/06 11:34:34 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/09/06 14:57:40 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	check_leaks(void)
+static void	free_arr(char	**arr)
 {
-	system("leaks pipex");
+	int	i;
+
+	i = 0;
+	if (arr == NULL)
+		return ;
+	while (arr[i] != NULL)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
 
-int	main(int argc, char **argv, char **envp)
+void	free_all(t_pipex *box)
 {
-	t_pipex	*pipex;
-
-	//atexit(check_leaks);
-	pipex = (t_pipex *)ft_calloc(1, sizeof(t_pipex));
-	if (pipex == ALLOC_FAIL)
-		handle_error(ERR_MEMORY, pipex);
-	if (argc != 5)
-		handle_error(ERR_ARG, pipex);
-	if (check_files(argv, envp, pipex) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	if (box->cmd1_args != NULL)
+		free_arr(box->cmd1_args);
+	if (box->cmd2_args != NULL)
+		free_arr(box->cmd2_args);
+	if (box != NULL)
+		free(box);
 }

@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 12:27:03 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/05 16:29:04 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:03:13 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*program = "/bin/ls";
 	char	*argvs[] = {"ls", "-l", NULL};
 	//char	*env[] = {"PATH=/bin:/usr/bin", "TERM ="}
-	execve(program, argvs, envp);
+	execve(program, argvs, NULL);
 	return (0);
 }

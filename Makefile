@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: harsh <harsh@student.42.fr>                +#+  +:+       +#+         #
+#    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/09/03 13:10:34 by harsh            ###   ########.fr        #
+#    Updated: 2023/09/06 14:17:01 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,15 @@ HEADERS = -I./include -I./srcs/myLib/header -g
 
 OBJDIR = ./objs
 
-VPATH 		= .:./srcs/:./srcs/bonus
+VPATH 		= .:./srcs/:./srcs/bonus/:./srcs/handle_error
+
+SRCS_ERR	= handle_error.c
 
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################
 
-SRCS = pipex.c
+SRCS = pipex.c check_files.c utils.c $(SRCS_ERR)
 OBJS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 
 # BONUS_SRC = $(SRC_PARSE) $(SRC_LISTFN) $(SRC_OPS) checker.c bonus_utils.c
