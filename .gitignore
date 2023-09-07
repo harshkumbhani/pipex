@@ -17,5 +17,7 @@ pipex.drawio
 *test.c
 *env.txt
 *infile
+*infile.txt
 *outfile.txt
 *outfile
+test/

@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:16:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/06 15:00:42 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/07 11:04:39 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "library.h"
 # include <limits.h>
+# include <errno.h>
 
 typedef struct	s_pipex
 {
@@ -22,11 +23,14 @@ typedef struct	s_pipex
 	int		outfile_fd;
 	int		pid1;
 	int		pid2;
+	char	path[PATH_MAX];
+	char	**envp_path;
+	char	*tmp;
+	char	*cmd1_path;
+	char	*cmd2_path;
 	char	**cmd1_args;
 	char	**cmd2_args;
-	char	env[PATH_MAX];
-	char	cmd_path[PATH_MAX];
-	int		pipe_fd[2];
+	int		fd[2];
 }	t_pipex;
 
 typedef enum e_errors
@@ -49,6 +53,7 @@ void	free_all(t_pipex *box);
 
 // Error Handling
 
-void	handle_error(t_errors err, t_pipex *pipe);
+void	handle_error(t_errors err, t_pipex *pipex);
+void	do_pipe(t_pipex *pipex, char *envp[]);
 
 #endif

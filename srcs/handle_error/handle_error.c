@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:17:15 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/06 15:15:42 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:44:23 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,17 @@ void	handle_error(t_errors err, t_pipex *pipex)
 	if (err == ERR_ARG)
 		ft_putstr_fd("Error: Invalid number of arguments\n", 0);
 	else if (err == ERR_INFILE)
+	{
 		ft_putstr_fd("Error: Unable to open infile\n", 0);
+		return ;
+	}
 	else if (err == ERR_OUTFILE)
 		ft_putstr_fd("Error: Unable to create outfile\n", 0);
 	else if (err == ERR_CMD1)
+	{
 		ft_putstr_fd("Error: Command 1 not found\n", 0);
+		return ;
+	}
 	else if (err == ERR_CMD2)
 		ft_putstr_fd("Error: Command 2 not found\n", 0);
 	else if (err == ERR_MEMORY)

@@ -3,54 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:45:04 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/06 19:15:41 by harsh            ###   ########.fr       */
+/*   Updated: 2023/09/07 13:55:01 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	check_cmd(t_pipex *pipex, char *envp[])
+char	*find_cmd_path(t_pipex *pipex, char **cmd_args)
+{
+	int		i;
+	char	*cmd_path;
+
+	cmd_path = NULL;
+	i = -1;
+	while (pipex->envp_path[++i] != NULL)
+	{
+		pipex->tmp = ft_strjoin(pipex->envp_path[i], "/");
+		if (pipex->tmp == ALLOC_FAIL)
+			handle_error(ERR_MEMORY, pipex);
+		cmd_path = ft_strjoin(pipex->tmp, cmd_args[0]);
+		if (cmd_path == ALLOC_FAIL)
+			handle_error(ERR_MEMORY, pipex);
+		free(pipex->tmp);
+		if (access(cmd_path, F_OK | X_OK) == 0)
+			return (cmd_path);
+		free(cmd_path);
+	}
+	pipex->tmp = NULL;
+	return (NULL);
+}
+
+void	get_envp_path(t_pipex *pipex, char *envp[])
 {
 	int	i;
 
 	i = -1;
-	printf("Initialsed cmd_path variable : %s\n", pipex->cmd_path);
 	while (envp[++i] != NULL)
 	{
 		if (ft_strncmp(envp[i], "PATH", 4) == 0)
 		{
-			ft_strlcat(pipex->cmd_path, envp[i], ft_strlen(envp[i]));
+			ft_strlcat(pipex->path, envp[i] + 5, ft_strlen(envp[i]) + 1);
 			break ;
 		}
 	}
-	printf("Path varaible : %s\n", pipex->cmd_path);
+	pipex->envp_path = ft_split(pipex->path, ':');
+	if (pipex->envp_path == ALLOC_FAIL)
+		handle_error(ERR_MEMORY, pipex);
+	pipex->cmd1_path = find_cmd_path(pipex, pipex->cmd1_args);
+	if (pipex->cmd1_path == NULL)
+		handle_error(ERR_CMD1, pipex);
+	pipex->cmd2_path = find_cmd_path(pipex, pipex->cmd2_args);
+	if (pipex->cmd2_path == NULL)
+		handle_error(ERR_CMD2, pipex);
 }
 
 int	check_files(char *argv[], char *envp[], t_pipex *pipex)
 {
-	(void)envp;
-	if (access(argv[1], F_OK) == -1)
-		return (EXIT_FAILURE);
-	else
-		pipex->infile_fd = open(argv[1], O_RDONLY);
+	if (access(argv[1], F_OK | R_OK) == -1)
+		handle_error(ERR_INFILE, pipex);
+	pipex->infile_fd = open(argv[1], O_RDONLY);
+	if (pipex->infile_fd < 0)
+		handle_error(ERR_INFILE, pipex);
+	pipex->outfile_fd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (pipex->outfile_fd < 0)
+		handle_error(ERR_OUTFILE, pipex);
 	pipex->cmd1_args = ft_split(argv[2], ' ');
-	check_cmd(pipex, envp);
+	if (pipex->cmd1_args == ALLOC_FAIL)
+		handle_error(ERR_MEMORY, pipex);
 	pipex->cmd2_args = ft_split(argv[3], ' ');
-	pipex->outfile_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC);
-	free_all(pipex);
+	if (pipex->cmd2_args == ALLOC_FAIL)
+		handle_error(ERR_MEMORY, pipex);
+	get_envp_path(pipex, envp);
 	return (EXIT_SUCCESS);
 }
-
-
-	//int i = -1;
-	//printf("Cmd 1 arguments :\n");
-	//while (pipex->cmd1_args[++i])
-	//	printf("%s\n", pipex->cmd1_args[i]);
-	//i = -1;
-	//printf("Cmd 2 arguments :\n");
-	//while (pipex->cmd1_args[++i])
-	//	printf("%s\n", pipex->cmd2_args[i]);
-	//printf("FD for infile : %d\nFD fot outfile : %d\n", pipex->infile_fd, pipex->outfile_fd);

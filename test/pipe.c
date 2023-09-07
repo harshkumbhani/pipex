@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 09:09:25 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/05 11:41:31 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:48:21 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,6 @@ int	main(int argc, char *argv[])
 		close(fd[1]);
 		execlp("cat", "cat", "infile", NULL);
 	}
-	//else
-	//{
-	//	close(fd[1]);
-	//	dup2(fd[0], STDIN_FILENO);
-	//	dup2(file_fd, STDOUT_FILENO);
-	//	close(file_fd);
-	//	close(fd[0]);
-	//	execlp("wc", "-l", "outfile", NULL);
-	//}
 	int	pid2 = fork();
 	if (pid2 < 0)
 		return (4);

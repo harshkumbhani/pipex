@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:11:27 by harsh             #+#    #+#             */
-/*   Updated: 2023/09/06 15:05:17 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:00:06 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int	main(int argc, char **argv, char **envp)
 		handle_error(ERR_ARG, pipex);
 	if (check_files(argv, envp, pipex) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	do_pipe(pipex, envp);
+	free_all(pipex);
 	return (EXIT_SUCCESS);
 }
