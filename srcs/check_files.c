@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:45:04 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/06 16:09:53 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/06 19:15:41 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ void	check_cmd(t_pipex *pipex, char *envp[])
 	int	i;
 
 	i = -1;
+	printf("Initialsed cmd_path variable : %s\n", pipex->cmd_path);
 	while (envp[++i] != NULL)
 	{
-		if (ft_strncmp(envp[i], "PATH", 5) == 0)
+		if (ft_strncmp(envp[i], "PATH", 4) == 0)
 		{
 			ft_strlcat(pipex->cmd_path, envp[i], ft_strlen(envp[i]));
 			break ;
