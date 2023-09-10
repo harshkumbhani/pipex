@@ -6,11 +6,33 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:17:15 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/07 13:44:23 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/10 18:10:53 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	handle_error_return(t_errors err, t_pipex *pipex, char *argv[])
+{
+	if (err == ERR_INFILE)
+	{
+		ft_putstr_fd("zsh: no such file or directory: ", 0);
+		ft_printf("%s\n", argv[1]);
+		return ;
+	}
+	else if (err == ERR_CMD1)
+	{
+		ft_putstr_fd("zsh: command not found: ", 0);
+		ft_printf("%s\n", pipex->cmd1_args[0]);
+		return ;
+	}
+	else if (err == ERR_CMD2)
+	{
+		ft_putstr_fd("zsh: command not found: ", 0);
+		ft_printf("%s\n", pipex->cmd1_args[sizeof(argv) - 2]);
+		return ;
+	}
+}
 
 void	handle_error(t_errors err, t_pipex *pipex)
 {
@@ -23,11 +45,6 @@ void	handle_error(t_errors err, t_pipex *pipex)
 	}
 	else if (err == ERR_OUTFILE)
 		ft_putstr_fd("Error: Unable to create outfile\n", 0);
-	else if (err == ERR_CMD1)
-	{
-		ft_putstr_fd("Error: Command 1 not found\n", 0);
-		return ;
-	}
 	else if (err == ERR_CMD2)
 		ft_putstr_fd("Error: Command 2 not found\n", 0);
 	else if (err == ERR_MEMORY)

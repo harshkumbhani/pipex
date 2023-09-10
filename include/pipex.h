@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:16:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/07 11:04:39 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/10 12:51:43 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef enum e_errors
 	ERR_FORK
 }	t_errors;
 
-int	check_files(char *argv[], char *envp[], t_pipex *box);
+int		check_files(char *argv[], char *envp[], t_pipex *box);
 
 void	free_all(t_pipex *box);
 
@@ -54,6 +54,7 @@ void	free_all(t_pipex *box);
 // Error Handling
 
 void	handle_error(t_errors err, t_pipex *pipex);
+void	handle_error_return(t_errors err, t_pipex *pipex, char *argv[]);
 void	do_pipe(t_pipex *pipex, char *envp[]);
 
 #endif
