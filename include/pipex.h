@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:16:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/11 08:33:28 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/11 09:24:03 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "library.h"
 # include <limits.h>
 # include <errno.h>
+# include <wait.h>
 
 typedef struct	s_pipex
 {
