@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:45:04 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/10 12:52:49 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:33:09 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,26 @@ void	get_envp_path(t_pipex *pipex, char *envp[], char *argv[])
 	pipex->envp_path = ft_split(pipex->path, ':');
 	if (pipex->envp_path == ALLOC_FAIL)
 		handle_error(ERR_MEMORY, pipex);
-	pipex->cmd1_path = find_cmd_path(pipex, pipex->cmd1_args);
-	if (pipex->cmd1_path == NULL)
-		handle_error_return(ERR_CMD1, pipex, argv);
+	if (pipex->infile_fd > -1)
+	{
+		pipex->cmd1_path = find_cmd_path(pipex, pipex->cmd1_args);
+		if (pipex->cmd1_path == NULL)
+			handle_error_return(ERR_CMD1, pipex, argv);
+	}
 	pipex->cmd2_path = find_cmd_path(pipex, pipex->cmd2_args);
 	if (pipex->cmd2_path == NULL)
-		handle_error(ERR_CMD2, pipex);
+		handle_error_return(ERR_CMD2, pipex, argv);
 }
 
 int	check_files(char *argv[], char *envp[], t_pipex *pipex)
 {
-	if (access(argv[1], F_OK | R_OK) == -1)
-		handle_error(ERR_INFILE, pipex);
+	access(argv[1], F_OK | R_OK);
 	pipex->infile_fd = open(argv[1], O_RDONLY);
 	if (pipex->infile_fd < 0)
 		handle_error_return(ERR_INFILE, pipex, argv);
 	pipex->outfile_fd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (pipex->outfile_fd < 0)
-		handle_error(ERR_OUTFILE, pipex);
+		handle_error_return(ERR_OUTFILE, pipex, argv);
 	pipex->cmd1_args = ft_split(argv[2], ' ');
 	if (pipex->cmd1_args == ALLOC_FAIL)
 		handle_error(ERR_MEMORY, pipex);

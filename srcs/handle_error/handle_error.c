@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:17:15 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/10 18:10:53 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:22:58 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@ void	handle_error_return(t_errors err, t_pipex *pipex, char *argv[])
 	else if (err == ERR_CMD2)
 	{
 		ft_putstr_fd("zsh: command not found: ", 0);
-		ft_printf("%s\n", pipex->cmd1_args[sizeof(argv) - 2]);
+		ft_printf("%s\n", argv[3]);
+		return ;
+	}
+	else if (err == ERR_OUTFILE)
+	{
+		ft_putstr_fd("zsh: no such file or directory: ", 0);
+		ft_printf("%s\n", argv[4]);
 		return ;
 	}
 }
@@ -38,11 +44,6 @@ void	handle_error(t_errors err, t_pipex *pipex)
 {
 	if (err == ERR_ARG)
 		ft_putstr_fd("Error: Invalid number of arguments\n", 0);
-	else if (err == ERR_INFILE)
-	{
-		ft_putstr_fd("Error: Unable to open infile\n", 0);
-		return ;
-	}
 	else if (err == ERR_OUTFILE)
 		ft_putstr_fd("Error: Unable to create outfile\n", 0);
 	else if (err == ERR_CMD2)

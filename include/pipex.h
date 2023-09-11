@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:16:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/10 12:51:43 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:33:28 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_pipex
 	char	path[PATH_MAX];
 	char	**envp_path;
 	char	*tmp;
+	char	*cmd_paths[2];
 	char	*cmd1_path;
 	char	*cmd2_path;
 	char	**cmd1_args;
@@ -49,7 +50,7 @@ typedef enum e_errors
 int		check_files(char *argv[], char *envp[], t_pipex *box);
 
 void	free_all(t_pipex *box);
-
+void	free_arr(char	**arr);
 
 // Error Handling
 

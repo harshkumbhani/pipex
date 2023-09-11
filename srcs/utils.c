@@ -6,13 +6,13 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:34:34 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/07 13:55:47 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:32:05 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	free_arr(char	**arr)
+void	free_arr(char	**arr)
 {
 	int	i;
 
