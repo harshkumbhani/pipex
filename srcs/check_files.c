@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:45:04 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/11 09:15:24 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/11 09:49:55 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	get_envp_path(t_pipex *pipex, char *envp[], char *argv[])
 	pipex->cmd2_path = find_cmd_path(pipex, pipex->cmd2_args);
 	if (pipex->cmd2_path == NULL)
 		handle_error_return(ERR_CMD2, pipex, argv);
+	free_arr(pipex->envp_path);
+	pipex->envp_path = NULL;
 }
 
 int	check_files(char *argv[], char *envp[], t_pipex *pipex)
