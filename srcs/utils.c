@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:34:34 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/11 09:37:23 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:33:06 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	free_arr(char	**arr)
 
 void	free_all(t_pipex *box)
 {
-	if (box == NULL)
-		return ;
 	if (box->infile_fd > -1)
 		close(box->infile_fd);
 	close(box->outfile_fd);

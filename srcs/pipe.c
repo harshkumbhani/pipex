@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:45:18 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/11 09:29:11 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:49:42 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	first_child(t_pipex *pipex, char *envp[])
 	if (pipex->pid1 == 0)
 	{
 		if (pipex->infile_fd < 0 || pipex->cmd1_path == NULL)
+		{
+			free_all(pipex);
 			exit(EXIT_FAILURE);
+		}
 		dup2(pipex->infile_fd, STDIN_FILENO);
 		dup2(pipex->fd[1], STDOUT_FILENO);
 		close(pipex->fd[0]);
@@ -38,7 +41,10 @@ void	second_child(t_pipex *pipex, char *envp[])
 	if (pipex->pid2 == 0)
 	{
 		if (pipex->outfile_fd < 0 || pipex->cmd1_path == NULL)
+		{
+			free_all(pipex);
 			exit(EXIT_FAILURE);
+		}
 		dup2(pipex->fd[0], STDIN_FILENO);
 		dup2(pipex->outfile_fd, STDOUT_FILENO);
 		close(pipex->fd[0]);
