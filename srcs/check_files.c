@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:45:04 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/11 09:49:55 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:37:52 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@ char	*find_cmd_path(t_pipex *pipex, char **cmd_args)
 	int		i;
 	char	*cmd_path;
 
-	cmd_path = NULL;
+	printf("cmd_path before ft_Strjoin: %s\n", cmd_args[0]);
+	//cmd_path = ft_strjoin(cmd_args[0], NULL);
+	//printf("cmd_path : %s\n", cmd_path);
+	
 	i = -1;
+	if (access(cmd_path, F_OK | X_OK) == 0)
+		return (cmd_path);
 	while (pipex->envp_path[++i] != NULL)
 	{
 		pipex->tmp = ft_strjoin(pipex->envp_path[i], "/");

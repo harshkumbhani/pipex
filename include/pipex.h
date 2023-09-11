@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:16:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/11 09:24:03 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:00:43 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "library.h"
 # include <limits.h>
 # include <errno.h>
-# include <wait.h>
+//# include <wait.h>
 
 typedef struct	s_pipex
 {
@@ -57,6 +57,6 @@ void	free_arr(char	**arr);
 
 void	handle_error(t_errors err, t_pipex *pipex);
 void	handle_error_return(t_errors err, t_pipex *pipex, char *argv[]);
-void	do_pipe(t_pipex *pipex, char *envp[]);
+int		do_pipe(t_pipex *pipex, char *envp[]);
 
 #endif
