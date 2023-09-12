@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:34:34 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/11 10:33:06 by harsh            ###   ########.fr       */
+/*   Updated: 2023/09/12 07:39:16 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	print_all_cmds(t_pipex *pipex)
+{
+	int	i = -1;
+
+	while (pipex->cmd1_args[++i])
+		printf("cmd1_Args[%d] : %s\n",i, pipex->cmd1_args[i]);
+	i = -1;
+	while (pipex->cmd2_args[++i])
+		printf("cmd2_Args[%d] : %s\n",i, pipex->cmd2_args[i]);
+}
+
+char	*remove_quotes(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (str[0] == '\'' && str[len - 1] == '\'')
+	{
+		str[len - 1] = '\0';
+		return (str + 1);
+	}
+	return (str);
+}
 
 void	free_arr(char	**arr)
 {

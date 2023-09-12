@@ -3,28 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:45:04 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/11 23:18:38 by harsh            ###   ########.fr       */
+/*   Updated: 2023/09/12 07:43:20 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	check_quotes(t_pipex *pipex)
+{
+	int	i;
+
+	i = -1;
+	while (pipex->cmd1_args[++i])
+		pipex->cmd1_args[i] = remove_quotes(pipex->cmd1_args[i]);
+	i = -1;
+	while (pipex->cmd2_args[++i])
+		pipex->cmd2_args[i] = remove_quotes(pipex->cmd2_args[i]);
+}
 
 char	*find_cmd_path(t_pipex *pipex, char **cmd_args)
 {
 	int		i;
 	char	*cmd_path;
 
-	printf("cmd_path before ft_Strjoin: %s\n", cmd_args[0]);
-	cmd_path = ft_strjoin(cmd_args[0], "\0");
-	printf("cmd_path : %s\n", cmd_path);
+	cmd_path = ft_strjoin(cmd_args[0], "");
+	if (access(cmd_path, F_OK | X_OK) == 0)
+		return (cmd_path);
 	free(cmd_path);
 	cmd_path = NULL;
 	i = -1;
-	if (access(cmd_path, F_OK | X_OK) == 0)
-		return (cmd_path);
 	while (pipex->envp_path[++i] != NULL)
 	{
 		pipex->tmp = ft_strjoin(pipex->envp_path[i], "/");
@@ -64,7 +74,6 @@ void	get_envp_path(t_pipex *pipex, char *envp[], char *argv[])
 		if (pipex->cmd1_path == NULL)
 			handle_error_return(ERR_CMD1, pipex, argv);
 	}
-	printf("cmd2_args : %s\n", pipex->cmd2_args[0]);
 	pipex->cmd2_path = find_cmd_path(pipex, pipex->cmd2_args);
 	if (pipex->cmd2_path == NULL)
 		handle_error_return(ERR_CMD2, pipex, argv);
@@ -88,5 +97,7 @@ int	check_files(char *argv[], char *envp[], t_pipex *pipex)
 	if (pipex->cmd2_args == ALLOC_FAIL)
 		handle_error(ERR_MEMORY, pipex);
 	get_envp_path(pipex, envp, argv);
+	//check_quotes(pipex);
+	print_all_cmds(pipex);
 	return (EXIT_SUCCESS);
 }

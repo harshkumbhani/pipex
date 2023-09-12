@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:16:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/11 18:53:43 by harsh            ###   ########.fr       */
+/*   Updated: 2023/09/12 07:38:36 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "library.h"
 # include <limits.h>
 # include <errno.h>
-# include <wait.h>
+//# include <wait.h>
 
 typedef struct	s_pipex
 {
@@ -52,7 +52,8 @@ int		check_files(char *argv[], char *envp[], t_pipex *box);
 
 void	free_all(t_pipex *box);
 void	free_arr(char	**arr);
-
+char	*remove_quotes(char *str);
+void	print_all_cmds(t_pipex *pipex);
 // Error Handling
 
 void	handle_error(t_errors err, t_pipex *pipex);

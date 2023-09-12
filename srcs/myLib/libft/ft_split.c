@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:29:37 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/07 13:24:05 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/12 07:45:01 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,50 @@
 /// @param str The string to search for substrings
 /// @param c The delimiter character. 
 /// @return The number of substrings in the string
+//static int	ft_substrcount(const char *str, char c)
+//{
+//	int	i;
+//	int	count;
+//	int	flag;
+
+//	flag = -1;
+//	i = 0;
+//	count = 0;
+//	while (str[i] != '\0')
+//	{
+//		if (str[i] != c && flag == -1)
+//		{
+//			flag = 1;
+//			count++;
+//		}
+//		else if (str[i] == c)
+//			flag = -1;
+//		i++;
+//	}
+//	return (count);
+//}
+
 static int	ft_substrcount(const char *str, char c)
 {
 	int	i;
 	int	count;
 	int	flag;
+	int	quote;
 
 	flag = -1;
 	i = 0;
+	quote = 0;
 	count = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] != c && flag == -1)
+		if (str[i] == '\'')
+			quote = !quote;
+		if (!quote && str[i] != c && flag == -1)
 		{
 			flag = 1;
 			count++;
 		}
-		else if (str[i] == c)
+		else if (!quote && str[i] == c)
 			flag = -1;
 		i++;
 	}
@@ -48,17 +75,43 @@ static int	ft_substrcount(const char *str, char c)
 /// @param c The delimiter character
 /// @return A newly allocated string representing the next substring 
 ///           in the string, or NULL if there are no more substrings.
+//static char	*ft_nextsubstr(char const **str, char c)
+//{
+//	unsigned int	len;
+//	char			*dststr;
+
+//	len = 0;
+//	while (**str && **str == c)
+//		(*str)++;
+//	while ((*str)[len] && (*str)[len] != c)
+//		len++;
+//	dststr = ft_substr(*str, 0, len);
+//	if (!dststr)
+//		return (NULL);
+//	*str += len;
+//	return (dststr);
+//}
+
 static char	*ft_nextsubstr(char const **str, char c)
 {
 	unsigned int	len;
 	char			*dststr;
+	int				quote;
 
 	len = 0;
-	while (**str && **str == c)
+	quote = 0;
+	while (**str && **str == c && !quote)
 		(*str)++;
-	while ((*str)[len] && (*str)[len] != c)
+	while ((*str)[len] && (quote || (*str)[len] != c))
+	{
+		if ((*str)[len] == '\'')
+			quote = !quote;
 		len++;
-	dststr = ft_substr(*str, 0, len);
+	}
+	if (**str == '\'')
+		dststr = ft_substr(*str, 1, len - 1);
+	else
+		dststr = ft_substr(*str, 0, len);
 	if (!dststr)
 		return (NULL);
 	*str += len;
