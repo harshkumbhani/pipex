@@ -7,7 +7,7 @@ srcs/make_output.txt
 *make_output.txt
 program
 myLib/libft.a
-pipex
+*pipex
 debug*
 srcs/myLib/libft.a
 .DS_Store

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:45:04 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/11 18:37:52 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/11 23:18:38 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ char	*find_cmd_path(t_pipex *pipex, char **cmd_args)
 	char	*cmd_path;
 
 	printf("cmd_path before ft_Strjoin: %s\n", cmd_args[0]);
-	//cmd_path = ft_strjoin(cmd_args[0], NULL);
-	//printf("cmd_path : %s\n", cmd_path);
-	
+	cmd_path = ft_strjoin(cmd_args[0], "\0");
+	printf("cmd_path : %s\n", cmd_path);
+	free(cmd_path);
+	cmd_path = NULL;
 	i = -1;
 	if (access(cmd_path, F_OK | X_OK) == 0)
 		return (cmd_path);
@@ -63,6 +64,7 @@ void	get_envp_path(t_pipex *pipex, char *envp[], char *argv[])
 		if (pipex->cmd1_path == NULL)
 			handle_error_return(ERR_CMD1, pipex, argv);
 	}
+	printf("cmd2_args : %s\n", pipex->cmd2_args[0]);
 	pipex->cmd2_path = find_cmd_path(pipex, pipex->cmd2_args);
 	if (pipex->cmd2_path == NULL)
 		handle_error_return(ERR_CMD2, pipex, argv);
