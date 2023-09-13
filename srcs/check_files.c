@@ -6,23 +6,11 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:45:04 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/12 07:43:20 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/13 17:37:10 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	check_quotes(t_pipex *pipex)
-{
-	int	i;
-
-	i = -1;
-	while (pipex->cmd1_args[++i])
-		pipex->cmd1_args[i] = remove_quotes(pipex->cmd1_args[i]);
-	i = -1;
-	while (pipex->cmd2_args[++i])
-		pipex->cmd2_args[i] = remove_quotes(pipex->cmd2_args[i]);
-}
 
 char	*find_cmd_path(t_pipex *pipex, char **cmd_args)
 {
@@ -90,14 +78,13 @@ int	check_files(char *argv[], char *envp[], t_pipex *pipex)
 	pipex->outfile_fd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (pipex->outfile_fd < 0)
 		handle_error_return(ERR_OUTFILE, pipex, argv);
-	pipex->cmd1_args = ft_split(argv[2], ' ');
+	pipex->cmd1_args = ft_split_pipex(argv[2], ' ');
 	if (pipex->cmd1_args == ALLOC_FAIL)
 		handle_error(ERR_MEMORY, pipex);
-	pipex->cmd2_args = ft_split(argv[3], ' ');
+	pipex->cmd2_args = ft_split_pipex(argv[3], ' ');
 	if (pipex->cmd2_args == ALLOC_FAIL)
 		handle_error(ERR_MEMORY, pipex);
 	get_envp_path(pipex, envp, argv);
-	//check_quotes(pipex);
 	print_all_cmds(pipex);
 	return (EXIT_SUCCESS);
 }

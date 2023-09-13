@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/09/07 10:45:16 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/09/13 15:46:38 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRCS_ERR	= handle_error.c
 #                                  Makefile  objs                              #
 ################################################################################
 
-SRCS = pipex.c check_files.c utils.c pipe.c $(SRCS_ERR)
+SRCS = pipex.c check_files.c utils.c pipe.c utils_split.c $(SRCS_ERR)
 OBJS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 
 # BONUS_SRC = $(SRC_PARSE) $(SRC_LISTFN) $(SRC_OPS) checker.c bonus_utils.c
