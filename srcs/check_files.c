@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:45:04 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/13 17:37:10 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:31:59 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	check_files(char *argv[], char *envp[], t_pipex *pipex)
 	if (pipex->cmd2_args == ALLOC_FAIL)
 		handle_error(ERR_MEMORY, pipex);
 	get_envp_path(pipex, envp, argv);
-	print_all_cmds(pipex);
 	return (EXIT_SUCCESS);
 }
+
+//	print_all_cmds(pipex);

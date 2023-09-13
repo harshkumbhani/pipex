@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_split.c                                      :+:      :+:    :+:   */
+/*   ft_split_pipex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 15:46:13 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/13 17:36:11 by hkumbhan         ###   ########.fr       */
+/*   Created: 2023/09/13 18:13:57 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/09/13 18:14:55 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
 static int	ft_substrcount(const char *str, char c)
 {

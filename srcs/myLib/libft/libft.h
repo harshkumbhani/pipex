@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:36:18 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/07 11:48:04 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:34:37 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_itoa(int n);
 char	**ft_split(const char *s, char c);
+char	**ft_split_pipex(const char *s, char c);
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 
 //  Conversion Functions
