@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:45:18 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/14 21:52:20 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/14 22:18:25 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	first_child(t_pipex *pipex, char *envp[])
 		close(pipex->fd[1]);
 		ft_close_fds(pipex);
 		if (execve(pipex->cmd_paths[0], pipex->cmd1_args, envp) == -1)
-			perror(NULL);
+		{
+			free_all(pipex);
+			exit(EXIT_FAILURE);
+		}
 	}
 }
 
@@ -53,7 +56,7 @@ void	second_child(t_pipex *pipex, char *envp[])
 		ft_close_fds(pipex);
 		if (execve(pipex->cmd_paths[1], pipex->cmd2_args, envp) == -1)
 		{
-			perror(NULL);
+			free_all(pipex);
 			exit(127);
 		}
 	}
