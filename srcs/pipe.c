@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:45:18 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/14 09:34:02 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:52:20 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	first_child(t_pipex *pipex, char *envp[])
 	if (pipex->pid1 == 0)
 	{
 		close(pipex->fd[0]);
-		if (pipex->infile_fd < 0 || pipex->cmd1_path == NULL)
+		if (pipex->infile_fd < 0)
 		{
 			free_all(pipex);
 			exit(EXIT_FAILURE);
@@ -28,10 +28,9 @@ void	first_child(t_pipex *pipex, char *envp[])
 		dup2(pipex->infile_fd, STDIN_FILENO);
 		dup2(pipex->fd[1], STDOUT_FILENO);
 		close(pipex->fd[1]);
-		close(pipex->infile_fd);
-		close(pipex->outfile_fd);
-		if (execve(pipex->cmd1_path, pipex->cmd1_args, envp) == -1)
-			exit(EXIT_FAILURE);
+		ft_close_fds(pipex);
+		if (execve(pipex->cmd_paths[0], pipex->cmd1_args, envp) == -1)
+			perror(NULL);
 	}
 }
 
@@ -43,7 +42,7 @@ void	second_child(t_pipex *pipex, char *envp[])
 	if (pipex->pid2 == 0)
 	{
 		close(pipex->fd[1]);
-		if (pipex->outfile_fd < 0 || pipex->cmd2_path == NULL)
+		if (pipex->outfile_fd < 0)
 		{
 			free_all(pipex);
 			exit(127);
@@ -51,10 +50,12 @@ void	second_child(t_pipex *pipex, char *envp[])
 		dup2(pipex->fd[0], STDIN_FILENO);
 		dup2(pipex->outfile_fd, STDOUT_FILENO);
 		close(pipex->fd[0]);
-		close(pipex->infile_fd);
-		close(pipex->outfile_fd);
-		if (execve(pipex->cmd2_path, pipex->cmd2_args, envp) == -1)
+		ft_close_fds(pipex);
+		if (execve(pipex->cmd_paths[1], pipex->cmd2_args, envp) == -1)
+		{
+			perror(NULL);
 			exit(127);
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:36:18 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/13 18:34:37 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:57:16 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ char	*ft_itoa(int n);
 char	**ft_split(const char *s, char c);
 char	**ft_split_pipex(const char *s, char c);
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
+
+// Free and Cleanup functions
+
+void	free_arr(char	**arr);
 
 //  Conversion Functions
 

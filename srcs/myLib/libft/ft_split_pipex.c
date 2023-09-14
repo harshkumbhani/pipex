@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:13:57 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/13 18:14:55 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:26:49 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ char	**ft_split_pipex(char const *s, char c)
 	int		len;
 
 	i = 0;
-	if (s == NULL)
-		return (NULL);
 	len = ft_substrcount(s, c);
 	substr = (char **)ft_calloc((len + 1), sizeof(char *));
 	if (!substr)

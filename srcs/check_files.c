@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:45:04 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/13 18:31:59 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:39:40 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*find_cmd_path(t_pipex *pipex, char **cmd_args)
 	int		i;
 	char	*cmd_path;
 
-	cmd_path = ft_strjoin(cmd_args[0], "");
+	cmd_path = strjoin_pipex(cmd_args[0], "");
 	if (access(cmd_path, F_OK | X_OK) == 0)
 		return (cmd_path);
 	free(cmd_path);
@@ -25,10 +25,10 @@ char	*find_cmd_path(t_pipex *pipex, char **cmd_args)
 	i = -1;
 	while (pipex->envp_path[++i] != NULL)
 	{
-		pipex->tmp = ft_strjoin(pipex->envp_path[i], "/");
+		pipex->tmp = strjoin_pipex(pipex->envp_path[i], "/");
 		if (pipex->tmp == ALLOC_FAIL)
 			handle_error(ERR_MEMORY, pipex);
-		cmd_path = ft_strjoin(pipex->tmp, cmd_args[0]);
+		cmd_path = strjoin_pipex(pipex->tmp, cmd_args[0]);
 		if (cmd_path == ALLOC_FAIL)
 			handle_error(ERR_MEMORY, pipex);
 		free(pipex->tmp);
@@ -58,12 +58,12 @@ void	get_envp_path(t_pipex *pipex, char *envp[], char *argv[])
 		handle_error(ERR_MEMORY, pipex);
 	if (pipex->infile_fd > -1)
 	{
-		pipex->cmd1_path = find_cmd_path(pipex, pipex->cmd1_args);
-		if (pipex->cmd1_path == NULL)
+		pipex->cmd_paths[0] = find_cmd_path(pipex, pipex->cmd1_args);
+		if (pipex->cmd_paths[0] == NULL)
 			handle_error_return(ERR_CMD1, pipex, argv);
 	}
-	pipex->cmd2_path = find_cmd_path(pipex, pipex->cmd2_args);
-	if (pipex->cmd2_path == NULL)
+	pipex->cmd_paths[1] = find_cmd_path(pipex, pipex->cmd2_args);
+	if (pipex->cmd_paths[1] == NULL)
 		handle_error_return(ERR_CMD2, pipex, argv);
 	free_arr(pipex->envp_path);
 	pipex->envp_path = NULL;
@@ -71,7 +71,6 @@ void	get_envp_path(t_pipex *pipex, char *envp[], char *argv[])
 
 int	check_files(char *argv[], char *envp[], t_pipex *pipex)
 {
-	access(argv[1], F_OK | R_OK);
 	pipex->infile_fd = open(argv[1], O_RDONLY);
 	if (pipex->infile_fd < 0)
 		handle_error_return(ERR_INFILE, pipex, argv);
