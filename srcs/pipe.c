@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:45:18 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/14 22:18:25 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/14 22:33:39 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	first_child(t_pipex *pipex, char *envp[])
 	if (pipex->pid1 == 0)
 	{
 		close(pipex->fd[0]);
-		if (pipex->infile_fd < 0)
+		if (pipex->infile_fd < 0 || pipex->cmd_paths[0] == NULL)
 		{
 			free_all(pipex);
 			exit(EXIT_FAILURE);
@@ -45,7 +45,7 @@ void	second_child(t_pipex *pipex, char *envp[])
 	if (pipex->pid2 == 0)
 	{
 		close(pipex->fd[1]);
-		if (pipex->outfile_fd < 0)
+		if (pipex->outfile_fd < 0 || pipex->cmd_paths[1] == NULL)
 		{
 			free_all(pipex);
 			exit(127);
