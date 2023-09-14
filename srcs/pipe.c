@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:45:18 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/13 18:42:16 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/14 09:34:02 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,3 @@ int	do_pipe(t_pipex *pipex, char *envp[])
 	status = WEXITSTATUS(status);
 	return (status);
 }
-

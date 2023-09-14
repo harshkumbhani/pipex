@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:16:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/13 18:33:40 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/14 09:37:54 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <errno.h>
 //# include <wait.h>
 
-typedef struct	s_pipex
+typedef struct s_pipex
 {
 	int		infile_fd;
 	int		outfile_fd;
@@ -56,9 +56,7 @@ int		check_files(char *argv[], char *envp[], t_pipex *box);
 
 void	free_all(t_pipex *box);
 void	free_arr(char	**arr);
-char	*remove_quotes(char *str);
 void	print_all_cmds(t_pipex *pipex);
-
 
 // Error Handling
 

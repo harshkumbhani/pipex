@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:34:34 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/12 07:39:16 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/14 09:34:46 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	print_all_cmds(t_pipex *pipex)
 {
-	int	i = -1;
+	int	i;
 
+	i = -1;
 	while (pipex->cmd1_args[++i])
-		printf("cmd1_Args[%d] : %s\n",i, pipex->cmd1_args[i]);
+		printf("cmd1_Args[%d] : %s\n", i, pipex->cmd1_args[i]);
 	i = -1;
 	while (pipex->cmd2_args[++i])
-		printf("cmd2_Args[%d] : %s\n",i, pipex->cmd2_args[i]);
+		printf("cmd2_Args[%d] : %s\n", i, pipex->cmd2_args[i]);
 }
 
 char	*remove_quotes(char *str)
