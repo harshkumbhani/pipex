@@ -6,14 +6,14 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:16:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/14 22:34:22 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/16 08:01:44 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "library.h"
+# include "../srcs/myLib/header/library.h"
 # include <limits.h>
 # include <errno.h>
 //# include <wait.h>

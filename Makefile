@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/09/14 15:43:41 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/09/16 09:43:06 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,19 +26,21 @@ HEADERS = -I./include -I./srcs/myLib/header -g
 
 OBJDIR = ./objs
 
-VPATH 		= .:./srcs/:./srcs/bonus/:./srcs/handle_error
+VPATH 		= .:./srcs/:./srcs/bonus/:
 
 SRCS_ERR	= handle_error.c
+SRCS_OTHERS	= check_files.c utils.c pipe.c
 
+SRCS_BONUS	= pipex_bonus.c bonus_utils.c multiple_pipe.c
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################
 
-SRCS = pipex.c check_files.c utils.c pipe.c $(SRCS_ERR)
+SRCS = pipex.c $(SRCS_ERR) $(SRCS_OTHERS)
 OBJS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 
-# BONUS_SRC = $(SRC_PARSE) $(SRC_LISTFN) $(SRC_OPS) checker.c bonus_utils.c
-# BONUS_OBJS = $(addprefix $(OBJDIR)/, ${BONUS_SRC:%.c=%.o})
+BONUS_SRC = $(SRCS_BONUS)
+BONUS_OBJS = $(addprefix $(OBJDIR)/, ${BONUS_SRC:%.c=%.o})
 ################################################################################
 #                                 Makefile logic                               #
 ################################################################################
@@ -75,11 +77,11 @@ $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@ 
 
-# bonus: checker
+bonus: pipex_bonus
 
-# checker: $(BONUS_OBJS) $(LIBFT_LIB)
-# 	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR)$(OBJS) $(NO_COLOR)"
-# 	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBFT_LIB) -o $@
+pipex_bonus: $(BONUS_OBJS) $(LIBFT_LIB)
+	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR)$(OBJS) $(NO_COLOR)"
+	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBFT_LIB) -o $@
 
 clean:
 	@echo
