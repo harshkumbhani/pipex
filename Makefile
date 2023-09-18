@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: harsh <harsh@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/09/16 09:43:06 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/09/18 13:01:03 by harsh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ VPATH 		= .:./srcs/:./srcs/bonus/:
 SRCS_ERR	= handle_error.c
 SRCS_OTHERS	= check_files.c utils.c pipe.c
 
-SRCS_BONUS	= pipex_bonus.c bonus_utils.c multiple_pipe.c
+SRCS_BONUS	= pipex_bonus.c utils_bonus.c handle_pipe.c handle_error_bonus.c \
+				execute_bonus.c
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################

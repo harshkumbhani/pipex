@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:45:18 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/14 22:33:39 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:15:51 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	first_child(t_pipex *pipex, char *envp[])
+static void	first_child(t_pipex *pipex, char *envp[])
 {
 	pipex->pid1 = fork();
 	if (pipex->pid1 < 0)
@@ -37,7 +37,7 @@ void	first_child(t_pipex *pipex, char *envp[])
 	}
 }
 
-void	second_child(t_pipex *pipex, char *envp[])
+static void	second_child(t_pipex *pipex, char *envp[])
 {
 	pipex->pid2 = fork();
 	if (pipex->pid2 < 0)
@@ -62,7 +62,7 @@ void	second_child(t_pipex *pipex, char *envp[])
 	}
 }
 
-void	create_child_process(t_pipex *pipex, char *envp[])
+static void	create_child_process(t_pipex *pipex, char *envp[])
 {
 	if (pipex->infile_fd >= 0)
 		first_child(pipex, envp);
