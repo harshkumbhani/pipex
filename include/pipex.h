@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:16:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/18 08:33:37 by harsh            ###   ########.fr       */
+/*   Updated: 2023/09/18 16:49:24 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../srcs/myLib/header/library.h"
 # include <limits.h>
 # include <errno.h>
-# include <wait.h>
+//# include <wait.h>
 
 typedef struct s_pipex
 {
@@ -43,7 +43,8 @@ typedef enum e_errors
 	ERR_CMD2,
 	ERR_MEMORY,
 	ERR_PIPE,
-	ERR_FORK
+	ERR_FORK,
+	ERR_CMD
 }	t_errors;
 
 // Function to check access of the files and commands

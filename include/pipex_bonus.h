@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 11:01:50 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/18 12:56:51 by harsh            ###   ########.fr       */
+/*   Updated: 2023/09/18 16:16:01 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_pip_bonus
 	int		hdfd[2];
 	int		infile_fd;
 	int		outfile_fd;
+	int		last_pid;
 	char	path[PATH_MAX];
 	char	*tmp;
 	char	**envp_path;
@@ -31,16 +32,10 @@ typedef struct s_pip_bonus
 	char	**envp;
 }	t_pip_bonus;
 
-typedef enum e_errors_bonus
-{
-	ERR_FILEIN,
-	ERR_CMD
-} t_errors_bonus;
-
 // Error Handler functions
 
 void	handle_error_bonus(t_errors err, t_pip_bonus *pipex);
-void	error_bonus(t_errors_bonus err, char *cmd_or_file);
+void	error_bonus(t_errors err, char *cmd_or_file);
 
 // Utils 
 
@@ -53,7 +48,7 @@ char	*strjoin_pipex(char *s1, char *s2);
 
 // MUtliple pipe handle function def
 
-int		handle_pipe(t_pip_bonus *pipex);
 int		execute(t_pip_bonus *pipex, int i);
+int		create_pipes(t_pip_bonus *pipex, int i);
 
 #endif

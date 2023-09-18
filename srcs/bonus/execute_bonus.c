@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   execute_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:40:04 by harsh             #+#    #+#             */
-/*   Updated: 2023/09/18 12:54:50 by harsh            ###   ########.fr       */
+/*   Updated: 2023/09/18 15:55:12 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "../../include/pipex_bonus.h"
+
+void	get_envp_path(t_pip_bonus *pipex)
+{
+	int	i;
+
+	i = -1;
+	while (pipex->envp[++i] != NULL)
+	{
+		if (ft_strncmp(pipex->envp[i], "PATH", 4) == 0)
+		{
+			ft_strlcat(pipex->path, pipex->envp[i] + 5,
+				ft_strlen(pipex->envp[i]) + 1);
+			break ;
+		}
+	}
+	pipex->envp_path = ft_split(pipex->path, ':');
+	if (pipex->envp_path == ALLOC_FAIL)
+		handle_error_bonus(ERR_MEMORY, pipex);
+}
 
 char	*find_cmd_path(t_pip_bonus *pipex, char *cmd)
 {
@@ -36,6 +55,7 @@ char	*find_cmd_path(t_pip_bonus *pipex, char *cmd)
 			return (cmd_path);
 		free(cmd_path);
 	}
+	error_bonus(ERR_CMD, cmd);
 	pipex->tmp = NULL;
 	return (NULL);
 }
@@ -49,6 +69,8 @@ int	execute(t_pip_bonus *pipex, int i)
 	if (cmd_split == ALLOC_FAIL)
 		handle_error_bonus(ERR_MEMORY, pipex);
 	path = find_cmd_path(pipex, cmd_split[0]);
+	if (path == NULL)
+		exit(EXIT_FAILURE);
 	if (execve(path, cmd_split, pipex->envp) == -1)
 	{
 		error_bonus(ERR_CMD, cmd_split[0]);

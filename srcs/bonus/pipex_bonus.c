@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 06:24:10 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/18 12:45:09 by harsh            ###   ########.fr       */
+/*   Updated: 2023/09/18 16:35:25 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	execute_heredoc(t_pip_bonus *pipex)
 void	handle_heredoc(t_pip_bonus *pipex)
 {
 	int	pid;
-	int	status;
 
 	if (pipe(pipex->hdfd) == -1)
 		handle_error_bonus(ERR_PIPE, pipex);
@@ -52,13 +51,13 @@ void	handle_heredoc(t_pip_bonus *pipex)
 	{
 		close(pipex->hdfd[1]);
 		dup2(pipex->hdfd[0], STDIN_FILENO);
-		close(pipex->hdfd[0]);
-		waitpid(pid, &status, 0);
+		waitpid(pid, NULL, 0);
 	}
 }
 
 int	main(int argc, char **argv, char **envp)
 {
+	int			i;
 	t_pip_bonus	*pipex;
 	int			return_value;
 
@@ -69,12 +68,17 @@ int	main(int argc, char **argv, char **envp)
 	if (pipex == ALLOC_FAIL)
 		handle_error_bonus(ERR_MEMORY, pipex);
 	init(pipex, argc, argv, envp);
-	get_envp_path(pipex);
 	if (pipex->here_doc_flag == TRUE)
+	{
+		i = 3;
 		handle_heredoc(pipex);
+	}
 	else
+	{
+		i = 2;
 		dup2(pipex->infile_fd, STDIN_FILENO);
-	return_value = handle_pipe(pipex);
+	}
+	return_value = create_pipes(pipex, i);
 	free_bonus(pipex);
 	return (return_value);
 }

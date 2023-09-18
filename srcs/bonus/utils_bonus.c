@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 06:32:12 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/18 12:57:29 by harsh            ###   ########.fr       */
+/*   Updated: 2023/09/18 16:46:58 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ void	init(t_pip_bonus *pipex, int ac, char **av, char **ep)
 		pipex->here_doc_flag = TRUE;
 		pipex->outfile_fd = open_file(av[ac - 1], 2);
 	}
-	else 
+	else
 	{
-		pipex->infile_fd = open_file(av[1], 1);
-		if (pipex->infile_fd < -1)
-			error_bonus(ERR_FILEIN, pipex->argv[1]);
+		pipex->infile_fd = open_file(av[1], 0);
+		if (pipex->infile_fd < 0)
+			error_bonus(ERR_INFILE, pipex->argv[1]);
 		pipex->outfile_fd = open_file(av[ac - 1], 1);
 	}
+	get_envp_path(pipex);
 }
 
 void	close_fds_bonus(t_pip_bonus *pipex)
@@ -53,36 +54,17 @@ void	free_bonus(t_pip_bonus *pipex)
 		free_arr(pipex->envp_path);
 }
 
-void	get_envp_path(t_pip_bonus *pipex)
-{
-	int	i;
-
-	i = -1;
-	while (pipex->envp[++i] != NULL)
-	{
-		if (ft_strncmp(pipex->envp[i], "PATH", 4) == 0)
-		{
-			ft_strlcat(pipex->path, pipex->envp[i] + 5,
-				ft_strlen(pipex->envp[i]) + 1);
-			break ;
-		}
-	}
-	pipex->envp_path = ft_split(pipex->path, ':');
-	if (pipex->envp_path == ALLOC_FAIL)
-		handle_error_bonus(ERR_MEMORY, pipex);
-}
-
 int	open_file(char *file, int i)
 {
 	int	fd;
 
 	fd = 0;
 	if (i == 0)
-		fd = open(file, O_RDONLY, 0777);
+		fd = open(file, O_RDONLY);
 	else if (i == 1)
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (i == 2)
-		fd = open(file , O_WRONLY | O_CREAT | O_APPEND, 0777);
+		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	return (fd);
 }
 
