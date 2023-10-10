@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 06:32:12 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/18 16:46:58 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:21:02 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@ void	init(t_pip_bonus *pipex, int ac, char **av, char **ep)
 	pipex->argc = ac;
 	pipex->argv = av;
 	pipex->envp = ep;
+	pipex->fd[0] = -1;
+	pipex->fd[1] = -1;
+	pipex->hdfd[0] = -1;
+	pipex->hdfd[1] = -1;
+	pipex->infile_fd = -1;
+	pipex->outfile_fd = -1;
+	pipex->tmp = NULL;
+	pipex->envp_path = NULL;
+	pipex->here_doc_flag = FALSE;
+	get_envp_path(pipex);
 	if (ft_strncmp(av[1], "here_doc", 8) == 0)
 	{
 		pipex->here_doc_flag = TRUE;
@@ -29,29 +39,32 @@ void	init(t_pip_bonus *pipex, int ac, char **av, char **ep)
 			error_bonus(ERR_INFILE, pipex->argv[1]);
 		pipex->outfile_fd = open_file(av[ac - 1], 1);
 	}
-	get_envp_path(pipex);
 }
 
 void	close_fds_bonus(t_pip_bonus *pipex)
 {
-	if (pipex->infile_fd > -1)
+	if (pipex->infile_fd != -1)
 		close(pipex->infile_fd);
-	if (pipex->outfile_fd > -1)
+	if (pipex->outfile_fd != -1)
 		close(pipex->outfile_fd);
+	if (pipex->fd[0] != -1)
+		close(pipex->fd[0]);
+	if(pipex->fd[1] != -1)
+		close(pipex->fd[1]);
+	if (pipex->hdfd[0] != -1)
+		close(pipex->hdfd[0]);
+	if (pipex->hdfd[1] != -1)
+		close(pipex->hdfd[1]);
 }
 
 void	free_bonus(t_pip_bonus *pipex)
 {
-	if (pipex->infile_fd > -1)
-		close(pipex->infile_fd);
-	if (pipex->outfile_fd > -1)
-		close(pipex->outfile_fd);
-	if (pipex->envp != NULL)
-		free_arr(pipex->envp);
-	if (pipex->argv != NULL)
-		free_arr(pipex->argv);
+	close_fds_bonus(pipex);
 	if (pipex->envp_path != NULL)
 		free_arr(pipex->envp_path);
+	if (pipex->tmp != NULL)
+		free(pipex->tmp);
+	free(pipex);
 }
 
 int	open_file(char *file, int i)

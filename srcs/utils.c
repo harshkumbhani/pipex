@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:34:34 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/14 21:40:16 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:14:31 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ void	ft_close_fds(t_pipex *pipex)
 		close(pipex->infile_fd);
 	if (pipex->outfile_fd > -1)
 		close(pipex->outfile_fd);
+	if (pipex->fd[0] != -1)
+		close(pipex->fd[0]);
+	if (pipex->fd[1] != -1)
+		close(pipex->fd[1]);
 }
 
 void	free_all(t_pipex *pipex)

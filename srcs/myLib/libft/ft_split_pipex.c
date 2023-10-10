@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_pipex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:13:57 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/14 12:26:49 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/01 23:40:02 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ft_substrcount(const char *str, char c)
 	i = 0;
 	quote = 0;
 	count = 0;
-	while (str[i] != '\0')
+	while (str != NULL && str[i] != '\0')
 	{
 		if (str[i] == '\'')
 			quote = !quote;

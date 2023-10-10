@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 06:24:10 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/18 16:35:25 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/10 10:55:03 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,16 @@ void	handle_heredoc(t_pip_bonus *pipex)
 	{
 		close(pipex->hdfd[0]);
 		execute_heredoc(pipex);
+		close(pipex->hdfd[1]);
+		close_fds_bonus(pipex);
+		free_bonus(pipex);
 		exit (EXIT_SUCCESS);
 	}
 	else
 	{
 		close(pipex->hdfd[1]);
 		dup2(pipex->hdfd[0], STDIN_FILENO);
+		close(pipex->hdfd[0]);
 		waitpid(pid, NULL, 0);
 	}
 }
@@ -62,6 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	int			return_value;
 
 	return_value = EXIT_SUCCESS;
+	i = 0;
 	if (argc < 5)
 		return (EXIT_FAILURE);
 	pipex = (t_pip_bonus *)ft_calloc(1, sizeof(t_pip_bonus));

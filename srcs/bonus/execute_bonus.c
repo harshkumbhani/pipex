@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:40:04 by harsh             #+#    #+#             */
-/*   Updated: 2023/09/18 15:55:12 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:18:40 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,16 @@ int	execute(t_pip_bonus *pipex, int i)
 		handle_error_bonus(ERR_MEMORY, pipex);
 	path = find_cmd_path(pipex, cmd_split[0]);
 	if (path == NULL)
-		exit(EXIT_FAILURE);
+	{
+		free_arr(cmd_split);
+		return (EXIT_FAILURE);
+	}
 	if (execve(path, cmd_split, pipex->envp) == -1)
 	{
 		error_bonus(ERR_CMD, cmd_split[0]);
-		free_bonus(pipex);
 		free_arr(cmd_split);
 		free(path);
-		return (-1);
+		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
