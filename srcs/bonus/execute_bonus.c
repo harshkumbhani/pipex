@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:40:04 by harsh             #+#    #+#             */
-/*   Updated: 2023/10/12 14:35:48 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:22:34 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ char	*find_cmd_path(t_pip_bonus *pipex, char *cmd)
 	while (pipex->envp_path[++j] != NULL)
 	{
 		pipex->tmp = strjoin_pipex(pipex->envp_path[j], "/");
-		if (pipex->tmp == ALLOC_FAIL)
+		if (pipex->tmp == NULL)
 			handle_error_bonus(ERR_MEMORY, pipex);
 		cmd_path = strjoin_pipex(pipex->tmp, cmd);
-		if (cmd_path == ALLOC_FAIL)
+		if (cmd_path == NULL)
 			handle_error_bonus(ERR_MEMORY, pipex);
 		free(pipex->tmp);
 		pipex->tmp = NULL;
@@ -47,7 +47,7 @@ void	execute(t_pip_bonus *pipex, int i)
 	char	**cmd_split;
 
 	cmd_split = ft_split_pipex(pipex->argv[i], ' ');
-	if (cmd_split == ALLOC_FAIL)
+	if (cmd_split == NULL)
 		handle_error_bonus(ERR_MEMORY, pipex);
 	path = find_cmd_path(pipex, cmd_split[0]);
 	if (path == NULL)

@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:11:27 by harsh             #+#    #+#             */
-/*   Updated: 2023/09/16 06:34:25 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:24:04 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 5)
 		return (EXIT_FAILURE);
 	pipex = (t_pipex *)ft_calloc(1, sizeof(t_pipex));
-	if (pipex == ALLOC_FAIL)
+	if (pipex == NULL)
 		handle_error(ERR_MEMORY, pipex);
 	check_files(argv, envp, pipex);
 	return_value = do_pipe(pipex, envp);

@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:53:46 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/07/18 10:04:16 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:21:27 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-
-# define ALLOC_FAIL NULL
 
 char	*get_next_line(int fd);
 char	*ft_read_file(int fd, char *stash);

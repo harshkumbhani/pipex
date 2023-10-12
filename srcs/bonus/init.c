@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 10:34:59 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/12 12:19:48 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:23:06 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void	get_envp_path(t_pip_bonus *pipex)
 		}
 	}
 	pipex->envp_path = ft_split(pipex->path, ':');
-	if (pipex->envp_path == ALLOC_FAIL)
+	if (pipex->envp_path == NULL)
 		handle_error_bonus(ERR_MEMORY, pipex);
 }

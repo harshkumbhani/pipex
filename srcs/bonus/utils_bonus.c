@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 06:32:12 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/12 12:19:53 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:23:28 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	close_fds_bonus(t_pip_bonus *pipex)
 		close(pipex->outfile_fd);
 	if (pipex->fd[0] != -1)
 		close(pipex->fd[0]);
-	if(pipex->fd[1] != -1)
+	if (pipex->fd[1] != -1)
 		close(pipex->fd[1]);
 	if (pipex->hdfd[0] != -1)
 		close(pipex->hdfd[0]);
@@ -65,8 +65,8 @@ char	*strjoin_pipex(char *s1, char *s2)
 	if (s1 == NULL && s2 == NULL)
 		return (NULL);
 	str = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
-	if (str == ALLOC_FAIL)
-		return (ALLOC_FAIL);
+	if (str == NULL)
+		return (NULL);
 	while (s1 != NULL && s1[i] != '\0')
 	{
 		str[i] = s1[i];
