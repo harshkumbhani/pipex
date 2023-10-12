@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 06:32:12 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/09 16:21:02 by harsh            ###   ########.fr       */
+/*   Updated: 2023/10/12 12:19:53 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
-
-void	init(t_pip_bonus *pipex, int ac, char **av, char **ep)
-{
-	pipex->argc = ac;
-	pipex->argv = av;
-	pipex->envp = ep;
-	pipex->fd[0] = -1;
-	pipex->fd[1] = -1;
-	pipex->hdfd[0] = -1;
-	pipex->hdfd[1] = -1;
-	pipex->infile_fd = -1;
-	pipex->outfile_fd = -1;
-	pipex->tmp = NULL;
-	pipex->envp_path = NULL;
-	pipex->here_doc_flag = FALSE;
-	get_envp_path(pipex);
-	if (ft_strncmp(av[1], "here_doc", 8) == 0)
-	{
-		pipex->here_doc_flag = TRUE;
-		pipex->outfile_fd = open_file(av[ac - 1], 2);
-	}
-	else
-	{
-		pipex->infile_fd = open_file(av[1], 0);
-		if (pipex->infile_fd < 0)
-			error_bonus(ERR_INFILE, pipex->argv[1]);
-		pipex->outfile_fd = open_file(av[ac - 1], 1);
-	}
-}
 
 void	close_fds_bonus(t_pip_bonus *pipex)
 {
@@ -62,8 +33,10 @@ void	free_bonus(t_pip_bonus *pipex)
 	close_fds_bonus(pipex);
 	if (pipex->envp_path != NULL)
 		free_arr(pipex->envp_path);
+	pipex->envp_path = NULL;
 	if (pipex->tmp != NULL)
 		free(pipex->tmp);
+	pipex->tmp = NULL;
 	free(pipex);
 }
 

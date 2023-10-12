@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_error_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 05:32:25 by harsh             #+#    #+#             */
-/*   Updated: 2023/10/10 11:45:40 by harsh            ###   ########.fr       */
+/*   Updated: 2023/10/12 14:33:32 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
 
-void	error_bonus(t_errors err, char *cmd_or_file)
+void	error_bonus(t_errors err, char *cmd_or_file, t_pip_bonus *pipex)
 {
 	if (err == ERR_INFILE)
 	{
@@ -23,12 +23,14 @@ void	error_bonus(t_errors err, char *cmd_or_file)
 	{
 		ft_putstr_fd("zsh: command not found: ", 2);
 		ft_putendl_fd(cmd_or_file, 2);
+		free(cmd_or_file);
 	}
+	free_bonus(pipex);
+	//exit(EXIT_FAILURE);
 }
 
 void	handle_error_bonus(t_errors err, t_pip_bonus *pipex)
 {
-	(void)pipex;
 	if (err == ERR_ARG)
 		ft_putstr_fd("Error: Invalid number of arguments\n", 2);
 	else if (err == ERR_OUTFILE)

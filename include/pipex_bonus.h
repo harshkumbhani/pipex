@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 11:01:50 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/18 16:16:01 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:52:47 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ typedef struct s_pip_bonus
 	char	**envp_path;
 	char	**argv;
 	char	**envp;
+	char	**cmd_split;
 }	t_pip_bonus;
 
 // Error Handler functions
 
 void	handle_error_bonus(t_errors err, t_pip_bonus *pipex);
-void	error_bonus(t_errors err, char *cmd_or_file);
+void	error_bonus(t_errors err, char *cmd_or_file, t_pip_bonus *pipex);
 
 // Utils 
 
@@ -46,9 +47,9 @@ int		open_file(char *file, int i);
 void	close_fds_bonus(t_pip_bonus *pipex);
 char	*strjoin_pipex(char *s1, char *s2);
 
-// MUtliple pipe handle function def
+// Multipe pipe handle function def
 
-int		execute(t_pip_bonus *pipex, int i);
+void	execute(t_pip_bonus *pipex, int i);
 int		create_pipes(t_pip_bonus *pipex, int i);
 
 #endif

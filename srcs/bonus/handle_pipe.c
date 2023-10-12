@@ -3,14 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 09:26:37 by harsh             #+#    #+#             */
-/*   Updated: 2023/10/10 11:44:09 by harsh            ###   ########.fr       */
+/*   Updated: 2023/10/12 12:38:17 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
+
+void	open_infile(t_pip_bonus *pipex)
+{
+	if (pipex->here_doc_flag == FALSE)
+	{
+		pipex->infile_fd = open_file(pipex->argv[1], 0);
+		if (pipex->infile_fd < 0)
+			error_bonus(ERR_INFILE, pipex->argv[1], pipex);
+	}
+}
+
+void	first_child(t_pip_bonus *pipex, int i)
+{
+	int	pid;
+
+	if (pipe(pipex->fd) == -1)
+		handle_error_bonus(ERR_PIPE, pipex);
+	pid = fork();
+	if (pid == -1)
+		handle_error_bonus(ERR_FORK, pipex);
+	if (pid == 0)
+	{
+		open_infile(pipex);
+		close(pipex->fd[0]);
+		dup2(pipex->infile_fd, STDIN_FILENO);
+		dup2(pipex->fd[1], STDOUT_FILENO);
+		close(pipex->fd[1]);
+		close_fds_bonus(pipex);
+		execute(pipex, i);
+	}
+	else
+	{
+		close(pipex->fd[1]);
+		dup2(pipex->fd[0], STDIN_FILENO);
+		close(pipex->fd[0]);
+		waitpid(pid, NULL, 0);
+	}
+}
 
 void	create_children(t_pip_bonus *pipex, int i)
 {
@@ -28,8 +66,6 @@ void	create_children(t_pip_bonus *pipex, int i)
 		close(pipex->fd[1]);
 		close_fds_bonus(pipex);
 		execute(pipex, i);
-		// if (execute(pipex, i) == EXIT_FAILURE)
-			// free_bonus(pipex);
 	}
 	else
 	{
@@ -55,8 +91,6 @@ void	last_child(t_pip_bonus *pipex, int i)
 		close(pipex->fd[0]);
 		close_fds_bonus(pipex);
 		execute(pipex, i);
-		// if (execute(pipex, i) == EXIT_FAILURE)
-			// free_bonus(pipex);
 	}
 }
 
@@ -65,6 +99,8 @@ int	create_pipes(t_pip_bonus *pipex, int i)
 	int	status;
 
 	status = EXIT_SUCCESS;
+	first_child(pipex, i);
+	i++;
 	while (i < pipex->argc - 2)
 	{
 		create_children(pipex, i);

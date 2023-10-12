@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/09/18 13:41:16 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/10/12 10:35:21 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS_ERR	= handle_error.c
 SRCS_OTHERS	= check_files.c utils.c pipe.c
 
 SRCS_BONUS	= pipex_bonus.c utils_bonus.c handle_pipe.c handle_error_bonus.c \
-				execute_bonus.c
+				execute_bonus.c init.c
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################
@@ -62,7 +62,7 @@ COM_STRING   = "Compiling"
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT_LIB)
-	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR)$(OBJS) $(NO_COLOR)"
+	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR) $(OBJS) $(NO_COLOR)"
 	@$(CC) $(CFLAGS) $(HEADERS) $(OBJS) $(LIBFT_LIB) -o $@
 
 $(LIBFT_LIB):
@@ -81,7 +81,7 @@ $(OBJDIR)/%.o: %.c
 bonus: pipex_bonus
 
 pipex_bonus: $(BONUS_OBJS) $(LIBFT_LIB)
-	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR)$(OBJS) $(NO_COLOR)"
+	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR) $(BONUS_OBJS) $(NO_COLOR)"
 	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBFT_LIB) -o $@
 
 clean:
@@ -94,7 +94,7 @@ clean:
 fclean: clean
 	@printf "%b" "$(COM_COLOR)Cleaning libft library...$(NO_COLOR)"
 	@make fclean -C $(LIBFT_DIR)
-	@rm -f $(NAME) checker
+	@rm -f $(NAME) bonus
 	@echo
 
 norm: $(SRCS)
