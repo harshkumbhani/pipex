@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 05:32:25 by harsh             #+#    #+#             */
-/*   Updated: 2023/10/12 17:12:05 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:24:35 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	error_bonus(t_errors err, char *cmd_or_file, t_pip_bonus *pipex)
 	{
 		ft_putstr_fd("zsh: no such file or directory: ", 2);
 		ft_putendl_fd(cmd_or_file, 2);
+		free_bonus(pipex);
+		exit(EXIT_FAILURE);
 	}
 	else if (err == ERR_CMD)
 	{
