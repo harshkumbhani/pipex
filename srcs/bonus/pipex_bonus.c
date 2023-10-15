@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 06:24:10 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/12 17:23:17 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/15 11:32:59 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ int	main(int argc, char **argv, char **envp)
 		handle_heredoc(pipex);
 	}
 	else
-	{
 		i = 2;
-		dup2(pipex->infile_fd, STDIN_FILENO);
-	}
 	return_value = create_pipes(pipex, i);
 	free_bonus(pipex);
 	return (return_value);

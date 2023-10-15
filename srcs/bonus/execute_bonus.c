@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:40:04 by harsh             #+#    #+#             */
-/*   Updated: 2023/10/12 17:22:34 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/15 13:46:18 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	execute(t_pip_bonus *pipex, int i)
 	path = find_cmd_path(pipex, cmd_split[0]);
 	if (path == NULL)
 	{
-		ft_putstr_fd("Linr 55", STDERR_FILENO);
 		error_bonus(ERR_CMD, cmd_split[0], pipex);
 		free_arr(cmd_split);
 		exit(EXIT_FAILURE);
