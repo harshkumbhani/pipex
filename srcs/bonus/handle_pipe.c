@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 09:26:37 by harsh             #+#    #+#             */
-/*   Updated: 2023/10/13 11:22:28 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:34:03 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	first_child(t_pip_bonus *pipex, int i)
 		close(pipex->fd[1]);
 		dup2(pipex->fd[0], STDIN_FILENO);
 		close(pipex->fd[0]);
-		waitpid(pid, NULL, 0);
+		// waitpid(pid, NULL, 0);
 	}
 }
 
@@ -72,7 +72,7 @@ void	create_children(t_pip_bonus *pipex, int i)
 		close(pipex->fd[1]);
 		dup2(pipex->fd[0], STDIN_FILENO);
 		close(pipex->fd[0]);
-		waitpid(pid, NULL, 0);
+		// waitpid(pid, NULL, 0);
 	}
 }
 
@@ -107,6 +107,8 @@ int	create_pipes(t_pip_bonus *pipex, int i)
 		i++;
 	}
 	last_child(pipex, i);
+	for (int i = 0; i < pipex->argc - 2; i++)
+		waitpid(0, NULL, 0);
 	close_fds_bonus(pipex);
 	return (status);
 }
