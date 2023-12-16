@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 06:24:10 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/15 11:32:59 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/12/16 10:40:43 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	execute_heredoc(t_pip_bonus *pipex)
 		write(pipex->hdfd[1], str, ft_strlen(str));
 		free(str);
 	}
+	free(str);
 }
 
 void	handle_heredoc(t_pip_bonus *pipex)
