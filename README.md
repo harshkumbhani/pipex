@@ -1,2 +1,2 @@
 # pipex
-Creating shell PIPEX command
+Creating shell PIPE command
