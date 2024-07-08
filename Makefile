@@ -6,7 +6,7 @@
 #    By: harsh <harsh@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2024/07/09 01:58:24 by harsh            ###   ########.fr        #
+#    Updated: 2024/07/09 02:10:54 by harsh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ LOG := printf "[$(BO)$(G)ⓘ INFO$(X)] %s\n"
 
 OBJ_DIR := _obj
 INC_DIRS := ./include/ ./libft/include/
-SRC_DIRS := ./ ./srcs/ ./srcs/bonus/
+SRC_DIRS := ./ ./srcs/mandatory/ ./srcs/bonus/
 
 # Tell the Makefile where headers and source files are
 vpath %.h $(INC_DIRS)
