@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 10:34:59 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/12 17:23:06 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2024/07/09 02:00:22 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	init(t_pip_bonus *pipex, int ac, char **av, char **ep)
 	pipex->outfile_fd = -1;
 	pipex->tmp = NULL;
 	pipex->envp_path = NULL;
-	pipex->here_doc_flag = FALSE;
+	pipex->here_doc_flag = false;
 	get_envp_path(pipex);
 	if (ft_strncmp(av[1], "here_doc", 8) == 0)
 	{
-		pipex->here_doc_flag = TRUE;
+		pipex->here_doc_flag = true;
 		pipex->outfile_fd = open_file(av[ac - 1], 2);
 	}
 	else

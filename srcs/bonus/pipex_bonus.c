@@ -6,11 +6,11 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 06:24:10 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/12/16 10:40:43 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/09 01:59:52 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/pipex_bonus.h"
+#include "pipex_bonus.h"
 
 void	execute_heredoc(t_pip_bonus *pipex)
 {
@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char **envp)
 	if (pipex == NULL)
 		handle_error_bonus(ERR_MEMORY, pipex);
 	init(pipex, argc, argv, envp);
-	if (pipex->here_doc_flag == TRUE)
+	if (pipex->here_doc_flag == true)
 	{
 		i = 3;
 		handle_heredoc(pipex);

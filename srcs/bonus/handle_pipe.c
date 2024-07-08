@@ -6,7 +6,7 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 09:26:37 by harsh             #+#    #+#             */
-/*   Updated: 2023/11/09 19:34:03 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/09 02:00:03 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	open_infile(t_pip_bonus *pipex)
 {
-	if (pipex->here_doc_flag == FALSE)
+	if (pipex->here_doc_flag == false)
 	{
 		pipex->infile_fd = open_file(pipex->argv[1], 0);
 		if (pipex->infile_fd < 0)
