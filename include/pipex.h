@@ -6,17 +6,21 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:16:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/10 07:24:48 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/09 01:19:38 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "../srcs/myLib/header/library.h"
+// # include "../srcs/myLib/header/library.h"
+# include "ft_lib.h"
 # include <limits.h>
 # include <errno.h>
-// # include <wait.h>
+
+# ifdef __linux__
+#  include <wait.h>
+# endif
 
 typedef struct s_pipex
 {

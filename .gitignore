@@ -1,4 +1,4 @@
-objs/
+_obj/
 *.o
 *.log
 .vscode/
@@ -6,10 +6,9 @@ srcs/program
 srcs/make_output.txt
 *make_output.txt
 program
-myLib/libft.a
+libft/
 *pipex
 debug*
-srcs/myLib/libft.a
 .DS_Store
 pipex.pdf
 pipex.drawio
