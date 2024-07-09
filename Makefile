@@ -6,7 +6,7 @@
 #    By: harsh <harsh@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2024/07/09 02:12:08 by harsh            ###   ########.fr        #
+#    Updated: 2024/07/09 22:59:24 by harsh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ submodule:
 ft_lib:
 	@if [ ! -f $(LIBFT_LIB) ]; then \
 		$(LOG) "Creating ft_lib"; \
-		make re -C $(LIBFT_DIR); \
+		make -C $(LIBFT_DIR); \
 	else \
 		$(LOG) "ft_lib already created"; \
 	fi
