@@ -1,0 +1,26 @@
+name: pipex
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: make
+
+    - name: Run executable
+      run: ./pipex Makefile "cat" "wc -l" outfile
+
+    - name: Clean libraries
+      run: make fclean
+
+    - name: Intall bonus dependencies
+      run: make bonus
