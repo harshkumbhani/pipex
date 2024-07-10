@@ -34,7 +34,7 @@ LOG := printf "[$(BO)$(G)ⓘ INFO$(X)] %s\n"
 ################################################################################
 
 OBJ_DIR := _obj
-INC_DIRS := ./include/ ./libft/include/
+INC_DIRS := ./include ./libft/include
 SRC_DIRS := ./ ./srcs/mandatory/ ./srcs/bonus/
 
 # Tell the Makefile where headers and source files are
