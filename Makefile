@@ -67,7 +67,7 @@ all: submodule ft_lib $(NAME)
 
 $(NAME): $(OBJS)
 	@$(LOG) "Linking object files to $@"
-	@$(CC) $(CFLAGS) $(LIBFT_LIB) $^ -o $@
+	@$(CC) $(CFLAGS) $^ $(LIBFT_LIB) -o $@
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@$(LOG) "Compiling $(notdir $@)"
