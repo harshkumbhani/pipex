@@ -6,7 +6,7 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 06:24:10 by hkumbhan          #+#    #+#             */
-/*   Updated: 2024/07/09 01:59:52 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/12 23:20:57 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,15 @@ void	handle_heredoc(t_pip_bonus *pipex)
 	}
 }
 
+static int	handle_argc(void)
+{
+	ft_fprintf(STDERR_FILENO, "Usage 1: ./pipex <infile> \"cmd1\"");
+	ft_fprintf(STDERR_FILENO, " \"cmd2\" \"cmd3\" ... \"cmd_n\" <outfile>\n");
+	ft_fprintf(STDERR_FILENO, "\nUsage 2: ./pipex here_doc LIMITER cmd");
+	ft_fprintf(STDERR_FILENO, " cmd1 <outfile>\n");
+	return (EXIT_FAILURE);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	int			i;
@@ -69,7 +78,7 @@ int	main(int argc, char **argv, char **envp)
 	return_value = EXIT_SUCCESS;
 	i = 0;
 	if (argc < 5)
-		return (EXIT_FAILURE);
+		return (handle_argc());
 	pipex = (t_pip_bonus *)ft_calloc(1, sizeof(t_pip_bonus));
 	if (pipex == NULL)
 		handle_error_bonus(ERR_MEMORY, pipex);
